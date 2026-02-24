@@ -10,7 +10,8 @@ services:
       - mongo_data:/data/db
 
   backend:
-    build: ./backend
+    # REMOVED: build: ./backend
+    image: danysh008/mean-backend:latest
     container_name: mean_backend
     restart: always
     ports:
@@ -20,10 +21,10 @@ services:
     environment:
       - DB_HOST=mongodb
       - DB_PORT=27017
-      # add DB_USER/DB_PASS if your backend requires auth
 
   frontend:
-    build: ./frontend
+    # REMOVED: build: ./frontend
+    image: danysh008/mean-frontend:latest 
     container_name: mean_frontend
     restart: always
     ports:
