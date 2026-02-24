@@ -41,14 +41,19 @@ jobs:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
-      - name: Install ssh client
-        run: sudo apt-get update && sudo apt-get install -y openssh-client
-
-      - name: Add SSH key
-        uses: webfactory/ssh-agent@v0.9.0
+      - name: Deploy to Ubuntu VM
+        uses: appleboy/ssh-action@master
         with:
-          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
-
-      - name: Deploy to server
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} 'bash -s' < ./scripts/remote_deploy.sh
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            
+            cd ~/mean-stack-devops-task
+            
+           
+            git pull origin main
+            
+            sudo docker compose pull
+         
+            sudo docker compose up -d
