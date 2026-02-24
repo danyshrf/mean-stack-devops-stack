@@ -1,27 +1,42 @@
-In this DevOps task, you need to build and deploy a full-stack CRUD application using the MEAN stack (MongoDB, Express, Angular 15, and Node.js). The backend will be developed with Node.js and Express to provide REST APIs, connecting to a MongoDB database. The frontend will be an Angular application utilizing HTTPClient for communication.  
+# MEAN Stack CI/CD Deployment Architecture
 
-The application will manage a collection of tutorials, where each tutorial includes an ID, title, description, and published status. Users will be able to create, retrieve, update, and delete tutorials. Additionally, a search box will allow users to find tutorials by title.
+This repository contains the infrastructure as code (IaC) and automation pipelines to containerize and deploy a full-stack MEAN application. 
 
-## Project setup
+## Architecture Overview
+* **Frontend:** Angular 15, multi-stage Docker build, served via an Nginx reverse proxy (Port 80).
+* **Backend:** Node.js & Express API (Port 3000).
+* **Database:** MongoDB 6.0, deployed with persistent Docker volumes.
+* **Orchestration:** Docker Compose.
+* **Infrastructure:** Ubuntu 24.04 LTS VM (AWS EC2).
+* **CI/CD:** GitHub Actions.
 
-### Node.js Server
+## CI/CD Pipeline Configuration
+The deployment is fully automated via `.github/workflows/deploy.yml`. 
+Upon pushing code to the `main` branch, the pipeline executes the following idempotent workflow:
+1.  Checks out the latest code.
+2.  Builds the Frontend and Backend Docker images using Docker Buildx.
+3.  Pushes the artifacts to Docker Hub.
+4.  Establishes a secure SSH connection to the cloud infrastructure.
+5.  Pulls the latest `docker-compose.yml` and newly built images.
+6.  Gracefully tears down old containers and provisions the updated environment.
 
-cd backend
+## Step-by-Step Setup (Local Development)
+To run this application locally for testing:
+1.  Clone the repository: `git clone https://github.com/danyshrf/mean-stack-devops-stack.git`
+2.  Navigate to the root directory: `cd mean-stack-devops-stack`
+3.  Execute Docker Compose: `docker-compose up --build -d`
+4.  Access the frontend at `http://localhost:80` and the backend API at `http://localhost:3000`.
 
-npm install
+## Deployment Evidence
 
-You can update the MongoDB credentials by modifying the `db.config.js` file located in `app/config/`.
+### 1. CI/CD Configuration and Execution
+![CI/CD Pipeline](screenshots/cicd_execution.png)
 
-Run `node server.js`
+### 2. Docker Image Build and Push Process
+![Docker Hub Images](screenshots/docker_hub.png)
 
-### Angular Client
+### 3. Application Deployment and Working UI
+![Working MEAN App](screenshots/working_ui.png)
 
-cd frontend
-
-npm install
-
-Run `ng serve --port 8081`
-
-You can modify the `src/app/services/tutorial.service.ts` file to adjust how the frontend interacts with the backend.
-
-Navigate to `http://localhost:8081/`
+### 4. Nginx Setup and Infrastructure Details
+![Server Infrastructure](screenshots/infrastructure.png)
