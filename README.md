@@ -30,7 +30,8 @@ To run this application locally for testing:
 ## Deployment Evidence
 
 ### 1. CI/CD Configuration and Execution
-![CI/CD Pipeline](screenshots/cicd_execution.png)
+<img width="1919" height="782" alt="image" src="https://github.com/user-attachments/assets/c2f0ab79-749b-4a54-9a20-0efad538f22e" />
+
 
 ### 2. Docker Image Build and Push Process
 <img width="1913" height="347" alt="image" src="https://github.com/user-attachments/assets/63b5547e-b081-4c31-a340-9fa31c09b4bd" />
