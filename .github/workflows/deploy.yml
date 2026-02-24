@@ -50,7 +50,7 @@ jobs:
           script: |
             if [ ! -d "~/mean-stack-devops-task" ]; then
               echo "Repository not found on VM. Cloning now..."
-              git clone git@github.com/danyshrf/mean-stack-devops-task.git ~/mean-stack-devops-task
+              git clone https://github.com/danyshrf/mean-stack-devops-stack.git ~/mean-stack-devops-task
             fi
             
             cd ~/mean-stack-devops-task
