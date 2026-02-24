@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: mean_mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build: ./backend
+    container_name: mean_backend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    environment:
+      - DB_HOST=mongodb
+      - DB_PORT=27017
+      # add DB_USER/DB_PASS if your backend requires auth
+
+  frontend:
+    build: ./frontend
+    container_name: mean_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
