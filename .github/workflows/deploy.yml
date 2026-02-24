@@ -48,11 +48,12 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
+            if [ ! -d "~/mean-stack-devops-task" ]; then
+              echo "Repository not found on VM. Cloning now..."
+              git clone https://github.com/danyshrf/mean-stack-devops-task.git ~/mean-stack-devops-task
+            fi
             
             cd ~/mean-stack-devops-task
-            
-           
             git pull origin main
-            
             sudo docker-compose pull
             sudo docker-compose up -d
