@@ -37,7 +37,9 @@ To run this application locally for testing:
 
 
 ### 3. Application Deployment and Working UI
-![Working MEAN App](screenshots/working_ui.png)
+
+<img width="1919" height="782" alt="image" src="https://github.com/user-attachments/assets/b8c2db41-2c72-402f-9330-2501fd721932" />
+
 
 ### 4. Nginx Setup and Infrastructure Details
 ![Server Infrastructure](screenshots/infrastructure.png)
