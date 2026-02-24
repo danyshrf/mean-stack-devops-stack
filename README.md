@@ -33,7 +33,8 @@ To run this application locally for testing:
 ![CI/CD Pipeline](screenshots/cicd_execution.png)
 
 ### 2. Docker Image Build and Push Process
-![Docker Hub Images](screenshots/docker_hub.png)
+<img width="1913" height="347" alt="image" src="https://github.com/user-attachments/assets/63b5547e-b081-4c31-a340-9fa31c09b4bd" />
+
 
 ### 3. Application Deployment and Working UI
 ![Working MEAN App](screenshots/working_ui.png)
